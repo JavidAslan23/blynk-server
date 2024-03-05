@@ -95,7 +95,7 @@ public class MobilePurchaseLogic {
     }
 
     private void insertPurchase(String email, int reward, double price, String transactionId) {
-        if (transactionId.equals("AdColonyAward") || transactionId.equals("homeScreen")) {
+        if ("AdColonyAward".equals(transactionId) || "homeScreen".equals(transactionId)) {
             return;
         }
         blockingIOProcessor.executeDB(

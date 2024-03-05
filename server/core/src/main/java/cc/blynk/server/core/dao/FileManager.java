@@ -60,7 +60,7 @@ public class FileManager {
     private final String host;
 
     public FileManager(String dataFolder, String host) {
-        if (dataFolder == null || dataFolder.isEmpty() || dataFolder.equals("/path")) {
+        if (dataFolder == null || dataFolder.isEmpty() || "/path".equals(dataFolder)) {
             System.out.println("WARNING : '" + dataFolder + "' does not exists. "
                     + "Please specify correct -dataFolder parameter.");
             dataFolder = Paths.get(System.getProperty("java.io.tmpdir"), "blynk").toString();

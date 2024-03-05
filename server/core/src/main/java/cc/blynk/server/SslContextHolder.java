@@ -65,7 +65,7 @@ public class SslContextHolder {
         } else {
             log.info("Didn't find Let's Encrypt certificates.");
             if (host == null || host.isEmpty() || email == null || email.isEmpty()
-                    || email.equals("example@gmail.com") || email.startsWith("SMTP")) {
+                    || "example@gmail.com".equals(email) || email.startsWith("SMTP")) {
                 log.warn("You didn't specified 'server.host' or 'contact.email' "
                         + "properties in server.properties file. "
                         + "Automatic certificate generation is turned off. "

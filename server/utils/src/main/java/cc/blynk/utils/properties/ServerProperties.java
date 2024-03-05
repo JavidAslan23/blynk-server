@@ -43,7 +43,7 @@ public class ServerProperties extends BaseProperties {
     }
 
     public boolean isLocalRegion() {
-        return region.equals("local");
+        return "local".equals(region);
     }
 
     private String getProductName() {
@@ -111,7 +111,7 @@ public class ServerProperties extends BaseProperties {
             return "";
         }
         String httpsPort = getProperty("https.port");
-        if (httpsPort == null || httpsPort.equals("443")) {
+        if (httpsPort == null || "443".equals(httpsPort)) {
             return "";
         }
         return ":" + httpsPort;

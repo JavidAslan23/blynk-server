@@ -40,7 +40,7 @@ public class OTAManager {
 
     public OTAManager(ServerProperties props) {
         String port = props.getProperty("http.port", "8080");
-        this.serverHostUrl = "http://" + props.host + (port.equals("80") ? "" : (":" + port));
+        this.serverHostUrl = "http://" + props.host + ("80".equals(port) ? "" : (":" + port));
         this.staticFilesFolder = props.jarPath;
         this.otaInfos = new ConcurrentHashMap<>();
     }
