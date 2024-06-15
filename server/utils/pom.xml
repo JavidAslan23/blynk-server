@@ -9,5 +9,10 @@
 
     <groupId>cc.blynk.utils</groupId>
     <artifactId>utils</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>io.github.pixee</groupId>
+            <artifactId>java-security-toolkit</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,5 +1,6 @@
 package cc.blynk.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -111,7 +112,7 @@ public final class FileLoaderUtil {
         try (BufferedReader in = new BufferedReader(new InputStreamReader(is))) {
             String line;
             StringBuilder responseData = new StringBuilder();
-            while ((line = in.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                 responseData.append(line).append(NEW_LINE);
             }
             return responseData.toString();
