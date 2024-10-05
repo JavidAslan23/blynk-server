@@ -38,6 +38,7 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.SslProvider;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import java.security.SecureRandom;
 import org.mockito.Mockito;
 
 import java.net.URI;
@@ -52,7 +53,7 @@ public final class WebSocketClient extends BaseClient {
     public int msgId = 0;
 
     public WebSocketClient(String host, int port, String path, boolean isSSL) throws Exception {
-        super(host, port, new Random());
+        super(host, port, new SecureRandom());
 
         String scheme = isSSL ? "wss://" : "ws://";
         URI uri = new URI(scheme + host + ":" + port + path);
