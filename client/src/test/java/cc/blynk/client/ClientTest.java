@@ -2,6 +2,7 @@ package cc.blynk.client;
 
 import cc.blynk.client.core.AppClient;
 import cc.blynk.client.core.HardwareClient;
+import io.github.pixee.security.BoundedLineReader;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +31,7 @@ public class ClientTest {
     @Ignore
     public void testQuitApp() throws Exception {
         AppClient testAppClient = new AppClient(DEFAULT_HOST, DEFAULT_APPLICATION_PORT);
-        when(bufferedReader.readLine()).thenReturn("quit");
+        when(BoundedLineReader.readLine(bufferedReader, 5_000_000)).thenReturn("quit");
         testAppClient.start(bufferedReader);
         //verify(testAppClient.responseMock, never()).channelRead(any(), any());
     }
@@ -39,7 +40,7 @@ public class ClientTest {
     @Ignore
     public void testQuitHard() throws Exception {
         HardwareClient testHardClient = new HardwareClient(DEFAULT_HOST, DEFAULT_HARDWARE_PORT);
-        when(bufferedReader.readLine()).thenReturn("quit");
+        when(BoundedLineReader.readLine(bufferedReader, 5_000_000)).thenReturn("quit");
         testHardClient.start(bufferedReader);
         //verify(testHardClient.responseMock, never()).channelRead(any(), any());
     }
