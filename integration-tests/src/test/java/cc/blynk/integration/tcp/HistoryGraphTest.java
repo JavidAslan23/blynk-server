@@ -37,6 +37,7 @@ import cc.blynk.server.workers.HistoryGraphUnusedPinDataCleanerWorker;
 import cc.blynk.server.workers.ReportingTruncateWorker;
 import cc.blynk.utils.FileUtils;
 import cc.blynk.utils.ReportingUtil;
+import io.github.pixee.security.BoundedLineReader;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -1652,12 +1653,12 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
              InputStream gzipStream = new GZIPInputStream(fileStream);
              BufferedReader buffered = new BufferedReader(new InputStreamReader(gzipStream))) {
 
-            String[] lineSplit = buffered.readLine().split(",");
+            String[] lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(1.1D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(1, Long.parseLong(lineSplit[1]));
             assertEquals(0, Long.parseLong(lineSplit[2]));
 
-            lineSplit = buffered.readLine().split(",");
+            lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(2.2D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(2, Long.parseLong(lineSplit[1]));
             assertEquals(0, Long.parseLong(lineSplit[2]));
@@ -2231,23 +2232,23 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
              BufferedReader buffered = new BufferedReader(new InputStreamReader(gzipStream))) {
 
             //first device
-            String[] lineSplit = buffered.readLine().split(",");
+            String[] lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(1.1D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(1, Long.parseLong(lineSplit[1]));
             assertEquals(0, Long.parseLong(lineSplit[2]));
 
-            lineSplit = buffered.readLine().split(",");
+            lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(2.2D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(2, Long.parseLong(lineSplit[1]));
             assertEquals(0, Long.parseLong(lineSplit[2]));
 
             //second device
-            lineSplit = buffered.readLine().split(",");
+            lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(11.1D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(11, Long.parseLong(lineSplit[1]));
             assertEquals(1, Long.parseLong(lineSplit[2]));
 
-            lineSplit = buffered.readLine().split(",");
+            lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(12.2D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(12, Long.parseLong(lineSplit[1]));
             assertEquals(1, Long.parseLong(lineSplit[2]));
@@ -2309,23 +2310,23 @@ public class HistoryGraphTest extends SingleServerInstancePerTest {
              BufferedReader buffered = new BufferedReader(new InputStreamReader(gzipStream))) {
 
             //first device
-            String[] lineSplit = buffered.readLine().split(",");
+            String[] lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(1.1D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(1, Long.parseLong(lineSplit[1]));
             assertEquals(0, Long.parseLong(lineSplit[2]));
 
-            lineSplit = buffered.readLine().split(",");
+            lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(2.2D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(2, Long.parseLong(lineSplit[1]));
             assertEquals(0, Long.parseLong(lineSplit[2]));
 
             //second device
-            lineSplit = buffered.readLine().split(",");
+            lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(11.1D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(11, Long.parseLong(lineSplit[1]));
             assertEquals(1, Long.parseLong(lineSplit[2]));
 
-            lineSplit = buffered.readLine().split(",");
+            lineSplit = BoundedLineReader.readLine(buffered, 5_000_000).split(",");
             assertEquals(12.2D, Double.parseDouble(lineSplit[0]), 0.001D);
             assertEquals(12, Long.parseLong(lineSplit[1]));
             assertEquals(1, Long.parseLong(lineSplit[2]));

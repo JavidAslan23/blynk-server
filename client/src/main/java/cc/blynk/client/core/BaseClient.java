@@ -3,6 +3,7 @@ package cc.blynk.client.core;
 import cc.blynk.client.CommandParserUtil;
 import cc.blynk.server.core.protocol.model.messages.MessageBase;
 import cc.blynk.utils.properties.ServerProperties;
+import io.github.pixee.security.BoundedLineReader;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -158,7 +159,7 @@ public abstract class BaseClient {
 
     private void readUserInput(BufferedReader commandInputStream) throws IOException {
         String line;
-        while ((line = commandInputStream.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(commandInputStream, 5_000_000)) != null) {
             // If user typed the 'quit' command, wait until the server closes the connection.
             if ("quit".equals(line.toLowerCase())) {
                 log.info("Got 'quit' command. Closing client.");
