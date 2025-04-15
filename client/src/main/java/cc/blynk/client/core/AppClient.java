@@ -11,6 +11,7 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.SslProvider;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
+import java.security.SecureRandom;
 
 import javax.net.ssl.SSLException;
 import java.io.File;
@@ -26,7 +27,7 @@ public class AppClient extends BaseClient {
     protected SslContext sslCtx;
 
     public AppClient(String host, int port) {
-        super(host, port, new Random());
+        super(host, port, new SecureRandom());
     }
 
     protected AppClient(String host, int port, Random msgIdGenerator, ServerProperties properties) {
