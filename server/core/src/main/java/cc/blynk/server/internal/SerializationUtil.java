@@ -1,5 +1,6 @@
 package cc.blynk.server.internal;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -50,6 +51,7 @@ public final class SerializationUtil {
     private static Object deserializeObject(Path path) throws IOException, ClassNotFoundException {
         try (InputStream is = Files.newInputStream(path);
              ObjectInputStream objectinputstream = new ObjectInputStream(is)) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(objectinputstream);
             return objectinputstream.readObject();
         }
     }
