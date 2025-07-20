@@ -7,6 +7,7 @@ import cc.blynk.server.core.stats.GlobalStats;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
+import java.security.SecureRandom;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +22,7 @@ import static cc.blynk.server.core.protocol.enums.Command.PING;
 public class HardwareClient extends BaseClient {
 
     public HardwareClient(String host, int port) {
-        super(host, port, new Random());
+        super(host, port, new SecureRandom());
         log.info("Creating hardware client. Host : {}, port : {}", host, port);
         //pinging for hardware client to avoid closing from server side for inactivity
         nioEventLoopGroup.scheduleAtFixedRate(() -> send(new StringMessage(777, PING, "")), 12, 12, TimeUnit.SECONDS);

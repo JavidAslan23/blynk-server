@@ -41,6 +41,7 @@ import io.netty.handler.ssl.SslProvider;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 
 import java.net.URI;
+import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.Random;
 
@@ -51,7 +52,7 @@ public final class AppWebSocketClient extends BaseTestAppClient {
     public int msgId = 0;
 
     public AppWebSocketClient(String host, int port, String path) throws Exception {
-        super(host, port, new Random(), new ServerProperties(Collections.emptyMap()));
+        super(host, port, new SecureRandom(), new ServerProperties(Collections.emptyMap()));
 
         URI uri = new URI("wss://" + host + ":" + port + path);
         this.sslCtx = SslContextBuilder.forClient()
