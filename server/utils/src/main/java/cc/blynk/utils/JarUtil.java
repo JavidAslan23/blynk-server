@@ -1,5 +1,6 @@
 package cc.blynk.utils;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,7 +96,7 @@ public final class JarUtil {
 
         if (src != null) {
             URL jar = src.getLocation();
-            try (ZipInputStream zip = new ZipInputStream(jar.openStream())) {
+            try (ZipInputStream zip = ZipSecurity.createHardenedInputStream(jar.openStream())) {
                 ZipEntry ze;
 
                 while ((ze = zip.getNextEntry()) != null) {
